@@ -1,0 +1,34 @@
+<div class="flujo-container">
+  
+  <!-- PASO 1: Elegir Función -->
+  <app-seleccionar-funcion 
+    *ngIf="pasoActual() === 1"
+    [peliculaId]="reserva().peliculaId"
+    (onSiguiente)="onFuncionSeleccionada($event)">
+  </app-seleccionar-funcion>
+
+  <!-- PASO 2: Elegir Butacas -->
+  <app-seleccionar-butacas 
+    *ngIf="pasoActual() === 2"
+    [funcion]="reserva().funcion"
+    (onAtras)="retrocederPaso()"
+    (onSiguiente)="onButacasSeleccionadas($event)">
+  </app-seleccionar-butacas>
+
+  <!-- PASO 3: Candy y Resumen -->
+  <app-confirmar-compra 
+    *ngIf="pasoActual() === 3"
+    [reservaActual]="reserva()"
+    (onAtras)="retrocederPaso()"
+    (onSiguiente)="onResumenConfirmado($event)">
+  </app-confirmar-compra>
+
+  <!-- PASO 4: Pago -->
+  <app-pago 
+    *ngIf="pasoActual() === 4"
+    [montoTotal]="reserva().total"
+    (onAtras)="retrocederPaso()"
+    (onPagoExitoso)="finalizarCompra()">
+  </app-pago>
+
+</div>

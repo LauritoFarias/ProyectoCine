@@ -14,6 +14,10 @@ export class AuthService {
   // Ahora el signal usa la interfaz importada
   currentUser = signal<PerfilUsuario | null>(null);
 
+  constructor() {
+    this.iniciarListenerDeSesion();
+  }
+
   private iniciarListenerDeSesion() {
     this.supabase.auth.onAuthStateChange(async (event, session) => {
       if (session) {
@@ -26,13 +30,28 @@ export class AuthService {
 
   // Trae el nombre y el rol desde tu tabla 'clientes'
   private async cargarPerfil(userId: string) {
+    console.log("Buscando perfil en tabla clientes para el ID:", userId);
+
     const { data, error } = await this.supabase
       .from('clientes')
       .select('id, nombre, apellido, id_rol')
       .eq('id', userId)
       .single();
 
-    if (data) this.currentUser.set(data);
+    if (error) {
+      // Si hay error (como RLS o que no exista la fila), lo imprimimos en rojo
+      console.error("Error al buscar el perfil del cliente:", error);
+      
+      // COMENTAMOS ESTO TEMPORALMENTE PARA QUE NO TE CIERRE LA SESIÓN
+      // await this.supabase.auth.signOut(); 
+      // this.currentUser.set(null);
+      return; 
+    }
+
+    if (data) {
+      console.log("¡Perfil encontrado!", data);
+      this.currentUser.set(data);
+    }
   }
 
   // MÉTODO DE REGISTRO ACTUALIZADO (Asigna rol Cliente por defecto)

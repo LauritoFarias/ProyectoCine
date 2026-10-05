@@ -57,14 +57,14 @@
       
       <div class="movies-grid" *ngIf="topVentas().length > 0">
         <!-- Agregamos () en el ngFor -->
-        <div class="movie-card" *ngFor="let movie of topVentas()">
-          <img [src]="movie.imagen_url" [alt]="movie.nombre" class="poster">
-          <div class="movie-info">
-            <h3>{{ movie.nombre }}</h3>
-            <p>{{ movie.generosStr }}</p>
-            <span class="badge">{{ movie.clasificacion_edad }}</span>
-            <span class="duration">{{ movie.duracion }} min</span>
-          </div>
+        <div class="movie-card" *ngFor="let movie of enCartelera()">
+          <!-- Al hacer click, navega a /peliculas/3 (por ejemplo) -->
+          <img [src]="movie.imagen_url" 
+              [alt]="movie.nombre" 
+              class="poster"
+              style="cursor: pointer;"
+              [routerLink]="['/peliculas', movie.id]"> 
+              
         </div>
       </div>
     </section>
@@ -75,7 +75,12 @@
       <div class="movies-grid">
         <!-- Agregamos () en el ngFor -->
         <div class="movie-card" *ngFor="let movie of enCartelera()">
-          <img [src]="movie.imagen_url" [alt]="movie.nombre" class="poster">
+          <img [src]="movie.imagen_url" 
+              [alt]="movie.nombre" 
+              class="poster"
+              style="cursor: pointer;"
+              [routerLink]="['/peliculas', movie.id]"> 
+
           <div class="movie-info">
             <h3>{{ movie.nombre }}</h3>
             <p>{{ movie.generosStr }}</p>
@@ -92,7 +97,12 @@
       <div class="movies-grid">
         <!-- Agregamos () en el ngFor -->
         <div class="movie-card" *ngFor="let movie of proximamente()">
-          <img [src]="movie.imagen_url" [alt]="movie.nombre" class="poster">
+          <img [src]="movie.imagen_url" 
+              [alt]="movie.nombre" 
+              class="poster"
+              style="cursor: pointer;"
+              [routerLink]="['/peliculas', movie.id]"> 
+              
           <div class="movie-info">
             <h3>{{ movie.nombre }}</h3>
             <p>{{ movie.generosStr }}</p>
