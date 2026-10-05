@@ -1,34 +1,38 @@
 <div class="flujo-container">
+
+  <div *ngIf="!peliculaSeleccionada()" class="loading-state">
+    <p>Cargando película...</p>
+  </div>
   
-  <!-- PASO 1: Elegir Función -->
-  <app-seleccionar-funcion 
-    *ngIf="pasoActual() === 1"
-    [peliculaId]="reserva().peliculaId"
-    (onSiguiente)="onFuncionSeleccionada($event)">
-  </app-seleccionar-funcion>
+  <div *ngIf="peliculaSeleccionada()" class="flujo-content">
+    
+    <button routerLink="/" class="btn-volver">← Volver a Cartelera</button>
 
-  <!-- PASO 2: Elegir Butacas -->
-  <app-seleccionar-butacas 
-    *ngIf="pasoActual() === 2"
-    [funcion]="reserva().funcion"
-    (onAtras)="retrocederPaso()"
-    (onSiguiente)="onButacasSeleccionadas($event)">
-  </app-seleccionar-butacas>
+    <app-seleccionar-funcion 
+      *ngIf="pasoActual() === 1"
+      [pelicula]="peliculaSeleccionada()"
+      (onSiguiente)="onFuncionSeleccionada($event)">
+    </app-seleccionar-funcion>
 
-  <!-- PASO 3: Candy y Resumen -->
-  <app-confirmar-compra 
-    *ngIf="pasoActual() === 3"
-    [reservaActual]="reserva()"
-    (onAtras)="retrocederPaso()"
-    (onSiguiente)="onResumenConfirmado($event)">
-  </app-confirmar-compra>
+    <app-seleccionar-butacas 
+      *ngIf="pasoActual() === 2"
+      [funcion]="reserva().funcion"
+      (onAtras)="retrocederPaso()"
+      (onSiguiente)="onButacasSeleccionadas($event)">
+    </app-seleccionar-butacas>
 
-  <!-- PASO 4: Pago -->
-  <app-pago 
-    *ngIf="pasoActual() === 4"
-    [montoTotal]="reserva().total"
-    (onAtras)="retrocederPaso()"
-    (onPagoExitoso)="finalizarCompra()">
-  </app-pago>
+    <app-confirmar-compra 
+        *ngIf="pasoActual() === 3"
+        [reservaActual]="reserva()"
+        (onAtras)="retrocederPaso()"
+        (onSiguiente)="onResumenConfirmado($event)">
+    </app-confirmar-compra>
+
+    <app-pago 
+        *ngIf="pasoActual() === 4"
+        [montoTotal]="reserva().total"
+        (onAtras)="retrocederPaso()"
+        (onPagoExitoso)="finalizarCompra()">
+    </app-pago>
 
 </div>

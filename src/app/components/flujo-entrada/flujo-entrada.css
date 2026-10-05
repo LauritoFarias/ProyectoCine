@@ -1,0 +1,30 @@
+.flujo-page {
+  background-color: #121212;
+  min-height: calc(100vh - 70px);
+  padding: 2rem 4rem;
+  color: white;
+}
+
+.btn-volver {
+  background: transparent;
+  color: #aaaaaa;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 2rem;
+  transition: color 0.3s;
+}
+
+.btn-volver:hover {
+  color: #ffffff;
+}
+
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  font-size: 1.2rem;
+  color: #aaaaaa;
+}

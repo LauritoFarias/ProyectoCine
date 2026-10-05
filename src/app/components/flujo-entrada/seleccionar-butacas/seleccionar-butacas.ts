@@ -11,7 +11,7 @@ export class SeleccionarButacas {
 
   funcion = input<any>();
   
-  onAtras = output<void>(); // void porque no envía datos, solo avisa que volvió atrás
+  onAtras = output<void>();
   onSiguiente = output<any[]>();
 
 }

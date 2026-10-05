@@ -20,11 +20,9 @@ export class Registro {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  // Signals para controlar la visibilidad de las contraseñas
   hidePassword = signal(true);
   hideConfirmPassword = signal(true);
 
-  // Expresión regular: Al menos 1 mayúscula (?=.*[A-Z]) y 1 carácter especial (?=.*[^a-zA-Z0-9])
   passwordPattern = /(?=.*[A-Z])(?=.*[^a-zA-Z0-9])/;
 
   registroForm = new FormGroup({
@@ -41,12 +39,11 @@ export class Registro {
     tipoSangre: new FormControl(''),
     colorOjos: new FormControl(''),
     diasVacaciones: new FormControl(0, [Validators.min(0)])
-  }, { validators: passwordMatchValidator }); // Aplicamos el validador al grupo completo
+  }, { validators: passwordMatchValidator });
 
   mensajeErrorGeneral = signal('');
   mostrarToast = signal(false);
 
-  // Alternadores de visibilidad
   togglePassword() { this.hidePassword.set(!this.hidePassword()); }
   toggleConfirmPassword() { this.hideConfirmPassword.set(!this.hideConfirmPassword()); }
 
@@ -55,7 +52,6 @@ export class Registro {
     return !!control && control.invalid && (control.dirty || control.touched);
   }
 
-  // Verifica si el validador personalizado falló
   hasMismatchError(): boolean {
     const confirmControl = this.registroForm.get('confirmPassword');
     return !!(this.registroForm.hasError('mismatch') && confirmControl?.touched);
@@ -70,7 +66,6 @@ export class Registro {
     }
 
     try {
-      // Excluimos 'confirmPassword' de los datos que mandamos al backend
       const { confirmPassword, ...datosRegistro } = this.registroForm.value;
       
       await this.authService.registrarCliente(datosRegistro);

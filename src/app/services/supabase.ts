@@ -36,4 +36,35 @@ export class SupabaseService {
 
     return data;
   }
+
+  async getPeliculaById(id: string) {
+    const { data, error } = await this._supabase
+      .from('peliculas')
+      .select(`
+        id, nombre, sinopsis, duracion, clasificacion_edad, imagen_url, 
+        generos ( nombre )
+      `)
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error al obtener la película:', error);
+      return null;
+    }
+    return data;
+  }
+
+  async getFuncionesByPelicula(idPelicula: number) {
+    const { data, error } = await this._supabase
+      .from('funciones')
+      .select('*')
+      .eq('id_pelicula', idPelicula)
+      .order('fecha_hora_inicio', { ascending: true });
+
+    if (error) {
+      console.error('Error al traer funciones:', error);
+      return [];
+    }
+    return data;
+  }
 }

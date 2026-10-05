@@ -21,7 +21,7 @@ export class Login {
     this.mensajeError.set('');
     try {
       await this.authService.login(this.formData.email, this.formData.password);
-      this.router.navigate(['/']); // Si el login es exitoso, vamos al Home
+      this.router.navigate(['/']);
     } catch (error: any) {
       this.mensajeError.set('Correo o contraseña incorrectos.');
     }

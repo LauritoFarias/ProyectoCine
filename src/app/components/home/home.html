@@ -1,4 +1,3 @@
-<!-- BARRA DE NAVEGACIÓN (Se mantiene igual que antes) -->
 <nav class="navbar">
   <div class="nav-left">
     <h1 class="logo">CINE STAND CASE</h1>
@@ -17,17 +16,13 @@
   </div>
   
   <div class="nav-right">
-    <!-- MODO 1: USUARIO NO LOGUEADO -->
-  <!-- Usamos el getter de Angular Signals ( ) -->
   <button *ngIf="!authService.currentUser()" class="btn-login" routerLink="/login">
     INICIAR SESIÓN
   </button>
 
-  <!-- MODO 2: USUARIO LOGUEADO -->
   <div *ngIf="authService.currentUser() as user" class="dropdown user-menu">
     <a class="dropbtn user-greeting">
       <span>Hola, {{ user.nombre }}</span>
-      <!-- Icono de torso y cabeza -->
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
         <circle cx="12" cy="7" r="4"></circle>
@@ -42,23 +37,18 @@
   </div>
 </nav>
 
-<!-- CONTENEDOR PRINCIPAL -->
 <div class="page-wrapper">
   <main class="content-container">
     
-    <!-- SECCIÓN: LO MÁS VENDIDO -->
     <section id="lo-mas-vendido" class="movie-section">
       <h2 class="section-title">LO MÁS VENDIDO</h2>
       
-      <!-- Agregamos () para leer el signal -->
       <p *ngIf="topVentas().length === 0" style="color: #aaaaaa; font-style: italic;">
         Aún no hay registros de ventas.
       </p>
       
       <div class="movies-grid" *ngIf="topVentas().length > 0">
-        <!-- Agregamos () en el ngFor -->
         <div class="movie-card" *ngFor="let movie of enCartelera()">
-          <!-- Al hacer click, navega a /peliculas/3 (por ejemplo) -->
           <img [src]="movie.imagen_url" 
               [alt]="movie.nombre" 
               class="poster"
@@ -69,11 +59,9 @@
       </div>
     </section>
 
-    <!-- SECCIÓN: EN CARTELERA -->
     <section id="en-cartelera" class="movie-section">
       <h2 class="section-title">EN CARTELERA</h2>
       <div class="movies-grid">
-        <!-- Agregamos () en el ngFor -->
         <div class="movie-card" *ngFor="let movie of enCartelera()">
           <img [src]="movie.imagen_url" 
               [alt]="movie.nombre" 
@@ -91,18 +79,16 @@
       </div>
     </section>
 
-    <!-- SECCIÓN: PRÓXIMAMENTE -->
     <section id="proximamente" class="movie-section">
       <h2 class="section-title">PRÓXIMAMENTE</h2>
       <div class="movies-grid">
-        <!-- Agregamos () en el ngFor -->
         <div class="movie-card" *ngFor="let movie of proximamente()">
           <img [src]="movie.imagen_url" 
               [alt]="movie.nombre" 
               class="poster"
               style="cursor: pointer;"
               [routerLink]="['/peliculas', movie.id]"> 
-              
+
           <div class="movie-info">
             <h3>{{ movie.nombre }}</h3>
             <p>{{ movie.generosStr }}</p>

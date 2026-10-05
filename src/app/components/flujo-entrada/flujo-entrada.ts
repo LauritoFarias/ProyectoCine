@@ -1,6 +1,7 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { SupabaseService } from '../../services/supabase';
 import { SeleccionarFuncion } from './seleccionar-funcion/seleccionar-funcion';
 import { SeleccionarButacas } from './seleccionar-butacas/seleccionar-butacas';
 import { ConfirmarCompra } from './confirmar-compra/confirmar-compra';
@@ -8,17 +9,19 @@ import { Pago } from './pago/pago';
 
 @Component({
   selector: 'app-flujo-entrada',
-  imports: [CommonModule, SeleccionarFuncion, SeleccionarButacas, ConfirmarCompra, Pago],
+  imports: [CommonModule, RouterLink, SeleccionarFuncion, SeleccionarButacas, ConfirmarCompra, Pago],
   templateUrl: './flujo-entrada.html',
   styleUrl: './flujo-entrada.css',
 })
 export class FlujoEntrada implements OnInit {
 
   private route = inject(ActivatedRoute);
+  private supabase = inject(SupabaseService);
 
   pasoActual = signal<number>(1); 
+  
+  peliculaSeleccionada = signal<any>(null);
 
-  // Estado global de la reserva
   reserva = signal({
     peliculaId: '',
     funcion: null as any,
@@ -27,10 +30,21 @@ export class FlujoEntrada implements OnInit {
     total: 0
   });
 
-  ngOnInit() {
+  async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.reserva.update(r => ({ ...r, peliculaId: id }));
+      
+      const peli = await this.supabase.getPeliculaById(id);
+      
+      if (peli) {
+        const peliculaConGeneros = {
+          ...peli,
+          generosStr: peli.generos ? peli.generos.map((g: any) => g.nombre).join(', ') : ''
+        };
+        
+        this.peliculaSeleccionada.set(peliculaConGeneros);
+      }
     }
   }
 
@@ -47,13 +61,6 @@ export class FlujoEntrada implements OnInit {
     this.avanzarPaso();
   }
 
-  onResumenConfirmado(datosConfirmacion: any) {
-    // Aquí guardaremos el total y lo del candy
-    this.avanzarPaso();
-  }
-
-  finalizarCompra() {
-    console.log("¡Compra finalizada!", this.reserva());
-    // Lógica final de PDF y base de datos
-  }
+  onResumenConfirmado(datos: any) { this.avanzarPaso(); }
+  finalizarCompra() { console.log("¡Compra finalizada!"); }
 }

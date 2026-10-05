@@ -1,21 +1,18 @@
-/* Contenedor principal que centra la tarjeta */
 .auth-page {
-  /* Si pusiste el Navbar en app.component.html, restamos su altura (70px) para centrar perfecto */
   min-height: calc(100vh - 70px); 
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #121212; /* Gris muy oscuro del cuerpo */
+  background-color: #121212;
   padding: 2rem;
 }
 
-/* La tarjeta (Card) */
 .auth-card {
-  background-color: #1a1a1a; /* Un tono sutilmente más claro para resaltar del fondo */
+  background-color: #1a1a1a;
   width: 100%;
-  max-width: 400px; /* Tarjeta angosta para el login */
+  max-width: 400px;
   padding: 2.5rem;
-  border-radius: 16px; /* Ángulos redondeados */
+  border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
   color: white;
 }
@@ -61,10 +58,9 @@ input {
 
 input:focus {
   outline: none;
-  border-color: #d80000; /* Borde rojo al seleccionar */
+  border-color: #d80000;
 }
 
-/* Botón principal */
 .btn-primary {
   width: 100%;
   padding: 1rem;
@@ -83,7 +79,6 @@ input:focus {
   background-color: #ff1a1a;
 }
 
-/* Pie de la tarjeta (Enlace a registro) */
 .card-footer {
   margin-top: 2rem;
   text-align: center;
@@ -104,7 +99,6 @@ input:focus {
   color: #ffcccc;
 }
 
-/* Alertas de error/éxito */
 .alert {
   padding: 0.8rem;
   border-radius: 8px;

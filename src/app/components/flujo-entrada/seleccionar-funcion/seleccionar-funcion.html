@@ -1,1 +1,73 @@
-<p>seleccionar-funcion works!</p>
+<div class="split-container">
+      
+  <div class="left-panel">
+    <h2 class="movie-title">{{ pelicula().nombre }}</h2>
+    <img *ngIf="pelicula().imagen_url" [src]="pelicula().imagen_url" [alt]="pelicula().nombre" class="poster-detalle">
+    <div class="movie-badges">
+      <span class="badge">{{ pelicula().clasificacion_edad }}</span>
+      <span class="duration">{{ pelicula().duracion }} min</span>
+    </div>
+    <p class="sinopsis">{{ pelicula().sinopsis }}</p>
+  </div>
+
+  <div class="right-panel">
+    <h3>Elegí tu función</h3>
+    
+    <div *ngIf="funciones().length === 0" style="color: #aaaaaa; font-style: italic;">
+      No hay funciones programadas para esta película aún.
+    </div>
+
+    <ng-container *ngIf="funciones().length > 0">
+      
+      <!-- 1. DÍAS -->
+      <div class="filter-group">
+        <label>Día</label>
+        <div class="options-row">
+          <button 
+            *ngFor="let dia of diasDisponibles()" 
+            class="btn-option"
+            [class.active]="diaSeleccionado() === dia"
+            (click)="seleccionarDia(dia)">
+            {{ formatearFecha(dia) }}
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label>Formato e Idioma</label>
+        <div class="options-row">
+          <button 
+            *ngFor="let formato of formatosDisponibles()" 
+            class="btn-option"
+            [class.active]="formatoSeleccionado() === formato"
+            (click)="seleccionarFormato(formato)">
+            {{ formato }}
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-group horarios-group">
+        <label>Horarios Disponibles</label>
+        <div class="options-row">
+          <button 
+            *ngFor="let funcion of horariosDisponibles()" 
+            class="btn-time"
+            [class.active]="funcionSeleccionada()?.id === funcion.id"
+            (click)="seleccionarHorario(funcion)">
+            {{ extraerHora(funcion.fecha_hora_inicio) }}
+          </button>
+        </div>
+      </div>
+
+      <button 
+        class="btn-continuar" 
+        [disabled]="!funcionSeleccionada()"
+        [style.opacity]="!funcionSeleccionada() ? '0.5' : '1'"
+        [style.cursor]="!funcionSeleccionada() ? 'not-allowed' : 'pointer'"
+        (click)="confirmarFuncion()">
+        CONTINUAR A BUTACAS
+      </button>
+
+    </ng-container>
+  </div>
+</div>

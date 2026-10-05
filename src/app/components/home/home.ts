@@ -15,13 +15,9 @@ export class Home implements OnInit {
   private supabaseService = inject(SupabaseService);
   public authService = inject(AuthService);
 
-  // Declaramos los signals tipados con nuestra interfaz
   topVentas = signal<Pelicula[]>([]);
   enCartelera = signal<Pelicula[]>([]);
   proximamente = signal<Pelicula[]>([]);
-
-  // (Opcional) Como mencionaste, si necesitaras un modelo individual para un formulario:
-  // peliculaActual = signal<Pelicula>({ ...valores por defecto... });
 
   async ngOnInit() {
     await this.cargarPeliculas();
@@ -34,17 +30,14 @@ export class Home implements OnInit {
       const generosArray = pelicula.generos ? pelicula.generos.map((g: any) => g.nombre) : [];
       
       return {
-        ...pelicula, // Operador spread: copia id, nombre, duracion, etc. automáticamente
-        generosStr: generosArray.join(', ') // Agregamos nuestro string formateado
+        ...pelicula,
+        generosStr: generosArray.join(', ')
       };
     });
 
-    // Filtramos y ACTUALIZAMOS los signals usando .set()
     this.enCartelera.set(peliculasFormateadas.filter(p => p.estado === 'En Cartelera'));
     this.proximamente.set(peliculasFormateadas.filter(p => p.estado === 'Próximamente'));
     
-    // Si tuvieras datos de topVentas, harías lo mismo:
-    // this.topVentas.set(peliculasFormateadas.filter(p => ...));
   }
 
   scrollToSection(sectionId: string): void {

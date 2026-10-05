@@ -11,7 +11,6 @@ export class AuthService {
   private supabase = inject(SupabaseService).cliente;
   private router = inject(Router);
 
-  // Ahora el signal usa la interfaz importada
   currentUser = signal<PerfilUsuario | null>(null);
 
   constructor() {
@@ -28,7 +27,6 @@ export class AuthService {
     });
   }
 
-  // Trae el nombre y el rol desde tu tabla 'clientes'
   private async cargarPerfil(userId: string) {
     console.log("Buscando perfil en tabla clientes para el ID:", userId);
 
@@ -39,12 +37,9 @@ export class AuthService {
       .single();
 
     if (error) {
-      // Si hay error (como RLS o que no exista la fila), lo imprimimos en rojo
+
       console.error("Error al buscar el perfil del cliente:", error);
       
-      // COMENTAMOS ESTO TEMPORALMENTE PARA QUE NO TE CIERRE LA SESIÓN
-      // await this.supabase.auth.signOut(); 
-      // this.currentUser.set(null);
       return; 
     }
 
@@ -71,14 +66,13 @@ export class AuthService {
         tipo_sangre: datos.tipoSangre,
         color_ojos: datos.colorOjos,
         dias_vacaciones: datos.diasVacaciones,
-        id_rol: 1 // <-- ASIGNAMOS ROL CLIENTE
+        id_rol: 1
       });
       if (dbError) throw dbError;
     }
     return authData.user;
   }
 
-  // NUEVO: MÉTODO DE LOGIN
   async login(email: string, password: string) {
     const { data, error } = await this.supabase.auth.signInWithPassword({
       email,
@@ -88,7 +82,6 @@ export class AuthService {
     return data;
   }
 
-  // NUEVO: MÉTODO DE LOGOUT
   async logout() {
     await this.supabase.auth.signOut();
     this.router.navigate(['/']);
