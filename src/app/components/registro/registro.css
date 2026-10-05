@@ -1,0 +1,257 @@
+/* Contenedor principal */
+.auth-page {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #121212;
+  padding: 2rem;
+}
+
+/* La tarjeta de Registro (Más ancha que la de login) */
+.auth-card {
+  background-color: #1a1a1a;
+  width: 100%;
+  max-width: 550px; /* Tarjeta un poco más ancha para acomodar las columnas */
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.card-header h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+}
+
+.card-header p {
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 0.9rem;
+}
+
+/* Agrupador de inputs para ponerlos en dos columnas */
+.form-row {
+  display: flex;
+  gap: 1rem; /* Espacio entre las dos columnas */
+}
+
+/* Hace que ambos inputs de la fila ocupen exactamente el 50% del espacio */
+.form-row .form-group {
+  flex: 1; 
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: #cccccc;
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #333333;
+  background-color: #2a2a2a;
+  color: white;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #d80000;
+}
+
+/* Invierte los colores del icono del calendario en Google Chrome para que se vea blanco sobre fondo oscuro */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 1rem;
+  background-color: #d80000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #ff1a1a;
+}
+
+.card-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaaaaa;
+}
+
+.card-footer a {
+  color: #d80000;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.card-footer a:hover {
+  text-decoration: underline;
+  color: #ffcccc;
+}
+
+.alert {
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.alert.error {
+  background-color: rgba(216, 0, 0, 0.15);
+  border: 1px solid #d80000;
+  color: #ffcccc;
+}
+
+.alert.success {
+  background-color: rgba(0, 200, 83, 0.15);
+  border: 1px solid #00c853;
+  color: #b9f6ca;
+}
+
+/* === ESTILOS PARA VALIDACIONES === */
+/* Clase que se aplica si isInvalid() devuelve true */
+.input-error {
+  border-color: #ff4c4c !important; 
+  background-color: rgba(255, 76, 76, 0.05);
+}
+
+.error-text {
+  display: block;
+  color: #ff4c4c;
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+/* === TOAST MESSAGE (Notificación Flotante) === */
+.toast-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #00c853; /* Verde éxito */
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  z-index: 9999;
+  
+  /* Animación inicial oculta */
+  transform: translateY(100px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Efecto rebote suave */
+}
+
+/* Cuando el signal mostrarToast es true, se agrega esta clase */
+.toast-container.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toast-icon {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.toast-content p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* === ESTILOS DE LOS PLACEHOLDERS === */
+::placeholder {
+  color: #7a7a7a; /* Color gris suave */
+  font-size: 1rem;
+  opacity: 1; /* Firefox por defecto reduce la opacidad */
+}
+
+/* === ENVOLTORIO DE CONTRASEÑA Y OJO === */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  padding-right: 3rem; /* Deja espacio para que el texto no se superponga al ícono */
+}
+
+.btn-eye {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #888888;
+  cursor: pointer;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.btn-eye:hover {
+  color: #ffffff;
+}
+
+/* === ESTILOS DEL CALENDARIO NATIVO === */
+/* color-scheme: dark obliga al navegador a abrir el pop-up nativo del calendario con un fondo gris medio y texto blanco */
+input[type="date"] {
+  color-scheme: dark; 
+  color: #7a7a7a; /* Para que simule ser un placeholder cuando no hay fecha elegida */
+}
+
+input[type="date"]:valid {
+  color: #ffffff; /* Cuando eligen una fecha válida, se pone blanco como los demás textos */
+}
+
+/* Elimina el filtro invert(1) del código anterior si lo pusiste, ya que color-scheme: dark ya lo hace automáticamente en Chrome */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}

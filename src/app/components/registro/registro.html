@@ -1,0 +1,105 @@
+<!-- TOAST MESSAGE -->
+<div class="toast-container" [class.show]="mostrarToast()">
+  <div class="toast-content">
+    <span class="toast-icon">✓</span>
+    <div>
+      <strong>¡Registro exitoso!</strong>
+      <p>Redirigiendo a la cartelera...</p>
+    </div>
+  </div>
+</div>
+
+<div class="auth-page">
+  <div class="auth-card registro-card">
+    <div class="card-header">
+      <h2>Crear Cuenta</h2>
+      <p>Únete para obtener descuentos y acumular puntos</p>
+    </div>
+
+    <div class="alert error" *ngIf="mensajeErrorGeneral()">
+      {{ mensajeErrorGeneral() }}
+    </div>
+
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre *</label>
+          <input type="text" formControlName="nombre" placeholder="Nombre" [class.input-error]="isInvalid('nombre')">
+        </div>
+        <div class="form-group">
+          <label>Apellido *</label>
+          <input type="text" formControlName="apellido" placeholder="Apellido" [class.input-error]="isInvalid('apellido')">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Correo electrónico *</label>
+        <input type="email" formControlName="email" placeholder="Correo electrónico" [class.input-error]="isInvalid('email')">
+      </div>
+      
+      <!-- CONTRASEÑA -->
+      <div class="form-group">
+        <label>Contraseña *</label>
+        <div class="password-wrapper">
+          <input [type]="hidePassword() ? 'password' : 'text'" 
+                 formControlName="password" 
+                 placeholder="Contraseña" 
+                 [class.input-error]="isInvalid('password')">
+          <button type="button" class="btn-eye" (click)="togglePassword()">
+            <!-- SVG del Ojo -->
+            <svg *ngIf="hidePassword()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <!-- SVG del Ojo Tachado -->
+            <svg *ngIf="!hidePassword()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+          </button>
+        </div>
+        <small class="error-text" *ngIf="isInvalid('password')">
+          Mínimo 8 caracteres, 1 mayúscula y 1 carácter especial.
+        </small>
+      </div>
+
+      <!-- CONFIRMAR CONTRASEÑA -->
+      <div class="form-group">
+        <label>Confirmar Contraseña *</label>
+        <div class="password-wrapper">
+          <input [type]="hideConfirmPassword() ? 'password' : 'text'" 
+                 formControlName="confirmPassword" 
+                 placeholder="Confirmar Contraseña" 
+                 [class.input-error]="isInvalid('confirmPassword') || hasMismatchError()">
+          <button type="button" class="btn-eye" (click)="toggleConfirmPassword()">
+            <svg *ngIf="hideConfirmPassword()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <svg *ngIf="!hideConfirmPassword()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+          </button>
+        </div>
+        <small class="error-text" *ngIf="hasMismatchError()">Las contraseñas no coinciden.</small>
+      </div>
+
+      <div class="form-group">
+        <label>Fecha de Nacimiento *</label>
+        <input type="date" formControlName="fechaNacimiento" [class.input-error]="isInvalid('fechaNacimiento')">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Tipo de sangre</label>
+          <input type="text" formControlName="tipoSangre" placeholder="Tipo de sangre">
+        </div>
+        <div class="form-group">
+          <label>Color de ojos</label>
+          <input type="text" formControlName="colorOjos" placeholder="Color de ojos">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Días de vacaciones al año</label>
+        <input type="number" formControlName="diasVacaciones" placeholder="Días de vacaciones al año" [class.input-error]="isInvalid('diasVacaciones')" min="0">
+      </div>
+
+      <button type="submit" class="btn-primary">REGISTRARME</button>
+    </form>
+
+    <div class="card-footer">
+      <p>¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a></p>
+    </div>
+  </div>
+</div>

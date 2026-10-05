@@ -1,0 +1,29 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="card-header">
+      <h2>Iniciar Sesión</h2>
+      <p>Accede a tus entradas, puntos y combos</p>
+    </div>
+
+    <div class="alert error" *ngIf="mensajeError()">{{ mensajeError() }}</div>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" name="email" [(ngModel)]="formData.email" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" name="password" [(ngModel)]="formData.password" required>
+      </div>
+
+      <button type="submit" class="btn-primary">INGRESAR</button>
+    </form>
+
+    <div class="card-footer">
+      <!-- Usamos routerLink para ir al componente de registro -->
+      <p>¿No tienes cuenta? <a routerLink="/registro">Crear cuenta</a></p>
+    </div>
+  </div>
+</div>

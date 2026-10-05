@@ -1,0 +1,120 @@
+/* Contenedor principal que centra la tarjeta */
+.auth-page {
+  /* Si pusiste el Navbar en app.component.html, restamos su altura (70px) para centrar perfecto */
+  min-height: calc(100vh - 70px); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #121212; /* Gris muy oscuro del cuerpo */
+  padding: 2rem;
+}
+
+/* La tarjeta (Card) */
+.auth-card {
+  background-color: #1a1a1a; /* Un tono sutilmente más claro para resaltar del fondo */
+  width: 100%;
+  max-width: 400px; /* Tarjeta angosta para el login */
+  padding: 2.5rem;
+  border-radius: 16px; /* Ángulos redondeados */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.card-header h2 {
+  margin: 0 0 0.5rem 0;
+  color: white;
+  font-size: 1.8rem;
+}
+
+.card-header p {
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 0.9rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: #cccccc;
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #333333;
+  background-color: #2a2a2a;
+  color: white;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #d80000; /* Borde rojo al seleccionar */
+}
+
+/* Botón principal */
+.btn-primary {
+  width: 100%;
+  padding: 1rem;
+  background-color: #d80000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #ff1a1a;
+}
+
+/* Pie de la tarjeta (Enlace a registro) */
+.card-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaaaaa;
+}
+
+.card-footer a {
+  color: #d80000;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.card-footer a:hover {
+  text-decoration: underline;
+  color: #ffcccc;
+}
+
+/* Alertas de error/éxito */
+.alert {
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.alert.error {
+  background-color: rgba(216, 0, 0, 0.15);
+  border: 1px solid #d80000;
+  color: #ffcccc;
+}
