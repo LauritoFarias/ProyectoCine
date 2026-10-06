@@ -22,43 +22,8 @@
   margin-bottom: 2rem;
 }
 
-.card-header h2 {
-  margin: 0 0 0.5rem 0;
-  color: white;
-  font-size: 1.8rem;
-}
-
-.card-header p {
-  margin: 0;
-  color: #aaaaaa;
-  font-size: 0.9rem;
-}
-
 .form-group {
   margin-bottom: 1.2rem;
-}
-
-label {
-  display: block;
-  margin-bottom: 0.4rem;
-  font-size: 0.85rem;
-  color: #cccccc;
-}
-
-input {
-  width: 100%;
-  padding: 0.8rem;
-  border-radius: 8px;
-  border: 1px solid #333333;
-  background-color: #2a2a2a;
-  color: white;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-input:focus {
-  outline: none;
-  border-color: #d80000;
 }
 
 .btn-primary {
@@ -73,10 +38,6 @@ input:focus {
   cursor: pointer;
   margin-top: 1rem;
   transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #ff1a1a;
 }
 
 .card-footer {
@@ -96,19 +57,5 @@ input:focus {
 
 .card-footer a:hover {
   text-decoration: underline;
-  color: #ffcccc;
-}
-
-.alert {
-  padding: 0.8rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-.alert.error {
-  background-color: rgba(216, 0, 0, 0.15);
-  border: 1px solid #d80000;
   color: #ffcccc;
 }

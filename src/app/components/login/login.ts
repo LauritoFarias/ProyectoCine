@@ -16,6 +16,12 @@ export class Login {
 
   formData = { email: '', password: '' };
   mensajeError = signal('');
+  
+  hidePassword = signal(true); 
+
+  togglePassword() {
+    this.hidePassword.set(!this.hidePassword());
+  }
 
   async onSubmit() {
     this.mensajeError.set('');

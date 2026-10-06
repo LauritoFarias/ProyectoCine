@@ -1,9 +1,3 @@
-/* RESET LOCAL Y VARIABLES */
-:host {
-  display: block;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 /* === NAVBAR === */
 .navbar {
   background-color: #d80000;
@@ -119,20 +113,6 @@
   color: #d80000;
 }
 
-/* === LAYOUT PRINCIPAL === */
-.page-wrapper {
-  background-color: #121212;
-  min-height: 100vh;
-  padding: 0 5%;
-}
-
-.content-container {
-  background-color: #000000;
-  min-height: 100vh;
-  padding: 2rem 3rem;
-  box-shadow: 0 0 20px rgba(0,0,0,0.8);
-}
-
 .user-greeting {
   display: flex;
   align-items: center;
@@ -149,15 +129,6 @@
 .movie-section {
   margin-bottom: 4rem;
   padding-top: 2rem;
-}
-
-.section-title {
-  color: white;
-  text-align: left;
-  font-size: 1.8rem;
-  border-bottom: 2px solid #d80000;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
 }
 
 .movies-grid {

@@ -43,7 +43,8 @@ export class Home implements OnInit {
   scrollToSection(sectionId: string): void {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const yOffset = element.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({ top: yOffset, behavior: 'smooth' });
     }
   }
 }

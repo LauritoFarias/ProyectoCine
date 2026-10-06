@@ -67,4 +67,38 @@ export class SupabaseService {
     }
     return data;
   }
+
+  async getButacasOcupadas(idFuncion: number) {
+    const { data, error } = await this._supabase
+      .from('butacas_reservadas')
+      .select('*')
+      .eq('id_funcion', idFuncion);
+
+    if (error) console.error('Error al traer butacas:', error);
+    return data || [];
+  }
+
+  async bloquearButaca(idFuncion: number, fila: string, columna: number, tipo: string, idUsuario: string) {
+    const { error } = await this._supabase
+      .from('butacas_reservadas')
+      .insert({
+        id_funcion: idFuncion,
+        fila: fila,
+        columna: columna,
+        tipo: tipo,
+        estado: 'Bloqueada',
+        id_usuario: idUsuario
+      });
+    
+    if (error) throw error; 
+  }
+
+  async liberarButaca(idFuncion: number, fila: string, columna: number) {
+    const { error } = await this._supabase
+      .from('butacas_reservadas')
+      .delete()
+      .match({ id_funcion: idFuncion, fila: fila, columna: columna });
+      
+    if (error) throw error;
+  }
 }

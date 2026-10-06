@@ -1,1 +1,73 @@
-<p>seleccionar-butacas works!</p>
+<div class="butacas-container">
+  
+  <div class="toast-error" *ngIf="toastMensaje()">
+    {{ toastMensaje() }}
+  </div>
+
+  <div class="header-actions">
+    <button class="btn-secundario" (click)="onAtras.emit()">← Cambiar Función</button>
+    <h2>Selecciona tus Butacas</h2>
+  </div>
+
+  <div class="escenario-container">
+    <div class="pantalla-linea">
+      <span class="pantalla-texto">PANTALLA</span>
+    </div>
+  </div>
+
+  <div class="leyenda">
+    <div class="item"><span class="caja estandar"></span> Estándar</div>
+    <div class="item"><span class="caja vip"></span> VIP</div>
+    <div class="item"><span class="caja accesible"></span> Exclusivo personas con discapacidad</div>
+    <div class="item"><span class="caja seleccionada"></span> Seleccionadas</div>
+    <div class="item"><span class="caja ocupada"></span> Ocupada</div>
+  </div>
+
+  <div class="sala">
+    <div class="fila" *ngFor="let fila of mapaFilas()">
+      <div class="letra-fila">{{ fila.letra }}</div>
+
+      <div class="bloque izquierdo">
+        <button *ngFor="let butaca of fila.izquierda" 
+                class="butaca {{ butaca.tipo.toLowerCase() }} {{ butaca.estado.toLowerCase() }}"
+                (click)="clickButaca(butaca)"
+                [disabled]="butaca.estado === 'Ocupada'">
+          {{ butaca.columna }}
+        </button>
+      </div>
+      <div class="pasillo"></div>
+      <div class="bloque central">
+        <button *ngFor="let butaca of fila.centro" 
+                class="butaca {{ butaca.tipo.toLowerCase() }} {{ butaca.estado.toLowerCase() }}"
+                (click)="clickButaca(butaca)"
+                [disabled]="butaca.estado === 'Ocupada'">
+          {{ butaca.columna }}
+        </button>
+      </div>
+      <div class="pasillo"></div>
+      <div class="bloque derecho">
+        <button *ngFor="let butaca of fila.derecha" 
+                class="butaca {{ butaca.tipo.toLowerCase() }} {{ butaca.estado.toLowerCase() }}"
+                (click)="clickButaca(butaca)"
+                [disabled]="butaca.estado === 'Ocupada'">
+          {{ butaca.columna }}
+        </button>
+      </div>
+
+      <div class="letra-fila">{{ fila.letra }}</div>
+    </div>
+  </div>
+
+  <div class="panel-inferior" *ngIf="butacasSeleccionadas().length > 0">
+    <div class="resumen">
+      <p>Butacas elegidas: <strong>{{ butacasSeleccionadas().length }}</strong></p>
+      <p class="detalle">
+        <span *ngFor="let b of butacasSeleccionadas(); let last = last">
+          {{ b.fila }}-{{ b.columna }}{{ !last ? ', ' : '' }}
+        </span>
+      </p>
+    </div>
+    <button class="btn-primario" (click)="continuar()">IR AL CANDY BAR →</button>
+  </div>
+
+</div>

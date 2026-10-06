@@ -42,7 +42,7 @@
 }
 
 /* Hace que ambos inputs de la fila ocupen exactamente el 50% del espacio */
-.form-row .form-group {
+.form-row {
   flex: 1; 
 }
 
@@ -50,51 +50,9 @@
   margin-bottom: 1.2rem;
 }
 
-label {
-  display: block;
-  margin-bottom: 0.4rem;
-  font-size: 0.85rem;
-  color: #cccccc;
-}
-
-input {
-  width: 100%;
-  padding: 0.8rem;
-  border-radius: 8px;
-  border: 1px solid #333333;
-  background-color: #2a2a2a;
-  color: white;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-input:focus {
-  outline: none;
-  border-color: #d80000;
-}
-
-/* Invierte los colores del icono del calendario en Google Chrome para que se vea blanco sobre fondo oscuro */
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;
-}
-
-.btn-primary {
-  width: 100%;
-  padding: 1rem;
-  background-color: #d80000;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #ff1a1a;
 }
 
 .card-footer {
@@ -115,26 +73,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .card-footer a:hover {
   text-decoration: underline;
   color: #ffcccc;
-}
-
-.alert {
-  padding: 0.8rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-.alert.error {
-  background-color: rgba(216, 0, 0, 0.15);
-  border: 1px solid #d80000;
-  color: #ffcccc;
-}
-
-.alert.success {
-  background-color: rgba(0, 200, 83, 0.15);
-  border: 1px solid #00c853;
-  color: #b9f6ca;
 }
 
 /* === ESTILOS PARA VALIDACIONES === */
@@ -204,54 +142,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0.9;
 }
 
-/* === ESTILOS DE LOS PLACEHOLDERS === */
-::placeholder {
-  color: #7a7a7a; /* Color gris suave */
-  font-size: 1rem;
-  opacity: 1; /* Firefox por defecto reduce la opacidad */
-}
-
-/* === ENVOLTORIO DE CONTRASEÑA Y OJO === */
-.password-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.password-wrapper input {
-  padding-right: 3rem; /* Deja espacio para que el texto no se superponga al ícono */
-}
-
-.btn-eye {
-  position: absolute;
-  right: 10px;
-  background: none;
-  border: none;
-  color: #888888;
-  cursor: pointer;
-  padding: 0.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.3s ease;
-}
-
-.btn-eye:hover {
-  color: #ffffff;
-}
-
 /* === ESTILOS DEL CALENDARIO NATIVO === */
-/* color-scheme: dark obliga al navegador a abrir el pop-up nativo del calendario con un fondo gris medio y texto blanco */
 input[type="date"] {
   color-scheme: dark; 
-  color: #7a7a7a; /* Para que simule ser un placeholder cuando no hay fecha elegida */
+  color: #7a7a7a;
 }
 
 input[type="date"]:valid {
-  color: #ffffff; /* Cuando eligen una fecha válida, se pone blanco como los demás textos */
+  color: #ffffff;
 }
 
-/* Elimina el filtro invert(1) del código anterior si lo pusiste, ya que color-scheme: dark ya lo hace automáticamente en Chrome */
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
